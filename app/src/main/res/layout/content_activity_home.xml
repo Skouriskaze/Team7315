@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="a7315.jd.a7315.ActivityCalculate"
-    tools:showIn="@layout/activity_calculate"
+    tools:context="a7315.jd.a7315.ActivityHome"
+    tools:showIn="@layout/activity_home"
     android:orientation="vertical"
     android:padding="15dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ll_deadlines"
+        android:id="@+id/llDeadlines"
         android:layout_weight="1"
         android:orientation="vertical" >
 
@@ -21,10 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:listSeparatorTextViewStyle"
-            android:text="@string/deadline_label"/>
+            android:text="@string/labelDeadline"/>
 
         <ListView
-            android:id="@+id/lv_deadlines"
+            android:id="@+id/lvDeadlines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </ListView>
@@ -32,7 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_summary"
+        android:id="@+id/llSummary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -42,10 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:listSeparatorTextViewStyle"
-            android:text="@string/summary_label"/>
+            android:text="@string/labelSummary"/>
 
         <ListView
-            android:id="@+id/lv_summary"
+            android:id="@+id/lvSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </ListView>
@@ -53,28 +53,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_buttons"
+        android:id="@+id/llButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_weight="0">
 
         <Button
-            android:id="@+id/add_aid"
+            android:id="@+id/btnAddAid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/add_aid" />
+            android:text="@string/addAid" />
 
         <Button
-            android:id="@+id/add_cost"
+            android:id="@+id/btnAddCost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/add_cost" />
+            android:text="@string/addCost" />
 
         <Button
-            android:id="@+id/button_calculate"
+            android:id="@+id/btnCalculate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
