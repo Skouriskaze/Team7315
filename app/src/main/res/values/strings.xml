@@ -2,6 +2,10 @@
     <string name="appName">GT Financial Aid</string>
     <string name="actionSettings">Settings</string>
 
+    <string name="titleHome">Home</string>
+    <string name="titleLogin">Login</string>
+    <string name="titleRegister">Register</string>
+
     <string name="addCost">Add Cost</string>
     <string name="addAid">Add Aid</string>
     <string name="calculate">Calculate</string>
@@ -13,6 +17,9 @@
 
     <string name="loginUsername">Username</string>
     <string name="loginPassword">Password</string>
+    <string name="loginPasswordConfirmation">Confirm Password</string>
     <string name="loginLogin">Login</string>
     <string name="loginRegister">Register</string>
+
+    <string name="aidLabel">Aid</string>
 </resources>
