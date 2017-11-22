@@ -22,4 +22,7 @@
     <string name="loginRegister">Register</string>
 
     <string name="aidLabel">Aid</string>
+    <string name="addButtonw">Add</string>
+    <string name="editButton">Edit</string>
+    <string name="removeButton">Remove</string>
 </resources>
