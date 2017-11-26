@@ -31,7 +31,9 @@
         <activity
             android:name=".ActivityCosts"
             android:parentActivityName=".ActivityHome" />
-        <activity android:name=".ActivityCalculate"></activity>
+        <activity
+            android:name=".ActivityCalculate"
+            android:parentActivityName=".ActivityHome"/>
     </application>
 
 </manifest>

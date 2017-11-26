@@ -65,13 +65,13 @@ public class ActivityHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        btnAid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, ActivityAid.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityCalculate.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -55,7 +55,7 @@ public class ActivityCosts extends AppCompatActivity implements AddAidDialogFrag
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        aCost.add(name + "|" + amount);
+        aCost.add("$" + amount + "|" + name);
         adapter.notifyDataSetChanged();
     }
 
@@ -97,11 +97,11 @@ public class ActivityCosts extends AppCompatActivity implements AddAidDialogFrag
             TextView txtDate = view.findViewById(R.id.txtDate);
             TextView txtDeadline = view.findViewById(R.id.txtDeadline);
 
-            String szDate = item.split("[|]")[0];
-            String szDeadline = item.split("[|]")[1];
+            String szAmount = item.split("[|]")[0];
+            String szName = item.split("[|]")[1];
 
-            txtDate.setText(szDate);
-            txtDeadline.setText(szDeadline);
+            txtDate.setText(szAmount);
+            txtDeadline.setText(szName);
 
             return view;
         }

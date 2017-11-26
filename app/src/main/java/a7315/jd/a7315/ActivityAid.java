@@ -58,7 +58,7 @@ public class ActivityAid extends AppCompatActivity implements AddAidDialogFragme
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        aAid.add(name + "|" + amount);
+        aAid.add("$" + amount + "|" + name);
         adapter.notifyDataSetChanged();
     }
 
@@ -100,11 +100,11 @@ public class ActivityAid extends AppCompatActivity implements AddAidDialogFragme
             TextView txtDate = view.findViewById(R.id.txtDate);
             TextView txtDeadline = view.findViewById(R.id.txtDeadline);
 
-            String szDate = item.split("[|]")[0];
-            String szDeadline = item.split("[|]")[1];
+            String szAmount = item.split("[|]")[0];
+            String szName = item.split("[|]")[1];
 
-            txtDate.setText(szDate);
-            txtDeadline.setText(szDeadline);
+            txtDate.setText(szAmount);
+            txtDeadline.setText(szName);
 
             return view;
         }
