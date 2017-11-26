@@ -1,6 +1,7 @@
 package a7315.jd.a7315;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityHome extends AppCompatActivity {
+
+    Button btnAid;
+    Button btnCost;
+    Button btnCalculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,34 @@ public class ActivityHome extends AppCompatActivity {
         ListView lvSummary = findViewById(R.id.lvSummary);
         lvDeadline.setAdapter(oDeadlineAdapter);
         lvSummary.setAdapter(oSummaryAdapter);
+
+        btnAid = findViewById(R.id.btnAddAid);
+        btnCost = findViewById(R.id.btnAddCost);
+        btnCalculate = findViewById(R.id.btnCalculate);
+
+        final Context context = this;
+
+        btnAid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityAid.class);
+                startActivity(intent);
+            }
+        });
+        btnCost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityCosts.class);
+                startActivity(intent);
+            }
+        });
+//        btnAid.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, ActivityAid.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

@@ -1,10 +1,9 @@
 package a7315.jd.a7315;
 
-import android.app.DialogFragment;
 import android.content.Context;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,30 +16,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ActivityAid extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener{
+public class ActivityCosts extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener {
 
     Button btnAdd;
-    ListView lvAid;
+    ListView lvCost;
 
-    List<String> aAid;
+    List<String> aCost;
     BaseAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aid);
+        setContentView(R.layout.activity_costs);
 
 
         btnAdd = findViewById(R.id.btnAdd);
-        lvAid = findViewById(R.id.lvAid);
+        lvCost = findViewById(R.id.lvCost);
 
 
-        aAid = new ArrayList<>();
-        aAid.add("$5,000|HOPE");
-        aAid.add("$2,000|Misc");
-        aAid.add("$2,000|More Misc");
-        adapter = new DateAdapter(this, aAid);
-        lvAid.setAdapter(adapter);
+        aCost = new ArrayList<>();
+        aCost.add("$5,000|Tuition");
+        aCost.add("$2,000|Housing");
+        aCost.add("$2,000|Misc");
+        adapter = new DateAdapter(this, aCost);
+        lvCost.setAdapter(adapter);
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +48,6 @@ public class ActivityAid extends AppCompatActivity implements AddAidDialogFragme
                 frag.show(getSupportFragmentManager(), "add_aid");
             }
         });
-
     }
 
     @Override
@@ -58,7 +55,7 @@ public class ActivityAid extends AppCompatActivity implements AddAidDialogFragme
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        aAid.add(name + "|" + amount);
+        aCost.add(name + "|" + amount);
         adapter.notifyDataSetChanged();
     }
 
@@ -110,4 +107,3 @@ public class ActivityAid extends AppCompatActivity implements AddAidDialogFragme
         }
     }
 }
-

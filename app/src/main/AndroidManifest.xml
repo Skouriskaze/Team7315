@@ -12,7 +12,7 @@
         <activity
             android:name=".ActivityHome"
             android:label="@string/titleHome"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityLogin"
             android:label="@string/titleLogin">
@@ -24,8 +24,14 @@
         </activity>
         <activity
             android:name=".ActivityRegister"
-            android:label="@string/titleRegister"></activity>
-        <activity android:name=".ActivityAid"></activity>
+            android:label="@string/titleRegister" />
+        <activity
+            android:name=".ActivityAid"
+            android:parentActivityName=".ActivityHome" />
+        <activity
+            android:name=".ActivityCosts"
+            android:parentActivityName=".ActivityHome" />
+        <activity android:name=".ActivityCalculate"></activity>
     </application>
 
 </manifest>
