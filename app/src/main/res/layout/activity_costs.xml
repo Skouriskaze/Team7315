@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="a7315.jd.a7315.ActivityAid">
+    tools:context="a7315.jd.a7315.Activities.ActivityAidSummary">
 
     <TextView
         android:layout_width="match_parent"

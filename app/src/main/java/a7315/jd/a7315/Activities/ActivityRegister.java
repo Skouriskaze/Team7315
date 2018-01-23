@@ -1,4 +1,4 @@
-package a7315.jd.a7315;
+package a7315.jd.a7315.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ActivityRegister extends AppCompatActivity {
+import a7315.jd.a7315.Contracts.ContractLogin;
+import a7315.jd.a7315.Presenters.PresenterLogin;
+import a7315.jd.a7315.R;
+
+public class ActivityRegister extends AppCompatActivity implements ContractLogin.View {
 
     private EditText mUsername;
     private EditText mPassword;
@@ -17,10 +21,14 @@ public class ActivityRegister extends AppCompatActivity {
     private Button mRegister;
     final private Context mContext = this;
 
+    private ContractLogin.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        presenter = new PresenterLogin(this);
 
         mUsername = findViewById(R.id.etUsername);
         mPassword = findViewById(R.id.etPassword);

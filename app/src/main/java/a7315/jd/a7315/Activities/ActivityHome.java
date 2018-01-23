@@ -1,4 +1,4 @@
-package a7315.jd.a7315;
+package a7315.jd.a7315.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,16 +18,26 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityHome extends AppCompatActivity {
+import a7315.jd.a7315.Contracts.ContractHome;
+import a7315.jd.a7315.Presenters.PresenterHome;
+import a7315.jd.a7315.R;
+
+public class ActivityHome extends AppCompatActivity implements ContractHome.View {
 
     Button btnAid;
     Button btnCost;
     Button btnCalculate;
 
+    ContractHome.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        presenter = new PresenterHome(this);
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,14 +64,14 @@ public class ActivityHome extends AppCompatActivity {
         btnAid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityAid.class);
+                Intent intent = new Intent(context, ActivityAidSummary.class);
                 startActivity(intent);
             }
         });
         btnCost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityCosts.class);
+                Intent intent = new Intent(context, ActivityCostsSummary.class);
                 startActivity(intent);
             }
         });

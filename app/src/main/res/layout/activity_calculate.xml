@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="a7315.jd.a7315.ActivityCalculate">
+    tools:context="a7315.jd.a7315.Activities.ActivityCalculate">
 
     <LinearLayout
         android:layout_width="match_parent"

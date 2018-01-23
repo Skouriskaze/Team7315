@@ -1,21 +1,18 @@
-package a7315.jd.a7315;
+package a7315.jd.a7315.Activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import a7315.jd.a7315.R;
 
 /**
  * Created by Jesse on 11/26/2017.
