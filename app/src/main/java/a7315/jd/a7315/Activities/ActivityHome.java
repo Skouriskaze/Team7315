@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractHome;
+import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Presenters.PresenterHome;
 import a7315.jd.a7315.R;
 
@@ -104,6 +105,16 @@ public class ActivityHome extends AppCompatActivity implements ContractHome.View
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public void setAidItems(List<ItemAid> items) {
+
+    }
+
+    @Override
+    public void updateAidList() {
+
     }
 
     public class DateAdapter extends BaseAdapter {
