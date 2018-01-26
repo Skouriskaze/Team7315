@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ActivityHome"
+            android:name=".Activities.ActivityHome"
             android:label="@string/titleHome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".Activities.ActivityLogin"
             android:label="@string/titleLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,17 +23,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityRegister"
+            android:name=".Activities.ActivityRegister"
             android:label="@string/titleRegister" />
         <activity
-            android:name=".ActivityAid"
-            android:parentActivityName=".ActivityHome" />
+            android:name=".Activities.ActivityAidSummary"
+            android:parentActivityName=".Activities.ActivityHome" />
         <activity
-            android:name=".ActivityCosts"
-            android:parentActivityName=".ActivityHome" />
+            android:name=".Activities.ActivityCostsSummary"
+            android:parentActivityName=".Activities.ActivityHome" />
         <activity
-            android:name=".ActivityCalculate"
-            android:parentActivityName=".ActivityHome"/>
+            android:name=".Activities.ActivityCalculate"
+            android:parentActivityName=".Activities.ActivityHome"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package a7315.jd.a7315;
+package a7315.jd.a7315.Activities;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -16,17 +16,25 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityCalculate extends AppCompatActivity {
+import a7315.jd.a7315.Contracts.ContractCalculate;
+import a7315.jd.a7315.Presenters.PresenterCalculate;
+import a7315.jd.a7315.R;
+
+public class ActivityCalculate extends AppCompatActivity implements ContractCalculate.View {
 
     Button btnCalculate;
     ListView lvAid;
     ListView lvCost;
     TextView txtResult;
 
+    ContractCalculate.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate);
+
+        presenter = new PresenterCalculate(this);
 
         btnCalculate = findViewById(R.id.btnCalculate);
         lvCost = findViewById(R.id.lvCost);
