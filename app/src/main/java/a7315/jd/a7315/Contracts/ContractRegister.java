@@ -12,6 +12,12 @@ public interface ContractRegister {
     }
 
     interface Presenter {
+        /**
+         * Registers a user
+         * @param username The user's username
+         * @param password The user's password
+         * @return true if registration is successful
+         */
         boolean register(String username, String password);
     }
 }
