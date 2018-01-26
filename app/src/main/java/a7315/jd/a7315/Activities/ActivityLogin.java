@@ -30,6 +30,7 @@ public class ActivityLogin extends AppCompatActivity implements ContractLogin.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        setTitle("Login");
 
         presenter = new PresenterLogin(this);
 
