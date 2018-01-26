@@ -13,6 +13,7 @@ public class PresenterRegister implements ContractRegister.Presenter {
         this.view = view;
     }
     public boolean register(String username, String password ) {
+        view.onRegisterComplete();
         return true;
     }
 }

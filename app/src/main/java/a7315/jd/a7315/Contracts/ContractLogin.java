@@ -6,7 +6,9 @@ package a7315.jd.a7315.Contracts;
 
 public interface ContractLogin {
     interface View {
-
+        void onSuccessfulLogin();
+        void onFailedLogin();
+        void onRegisterRequest();
     }
 
     interface Presenter {

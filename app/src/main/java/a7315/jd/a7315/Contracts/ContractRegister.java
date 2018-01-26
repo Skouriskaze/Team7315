@@ -6,6 +6,8 @@ package a7315.jd.a7315.Contracts;
 
 public interface ContractRegister {
     interface View {
+        void onRegisterComplete();
+        void onLoginRequest();
 
     }
 

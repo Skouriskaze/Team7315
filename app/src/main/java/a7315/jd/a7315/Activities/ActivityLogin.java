@@ -42,17 +42,34 @@ public class ActivityLogin extends AppCompatActivity implements ContractLogin.Vi
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ActivityHome.class);
-                startActivity(intent);
+                String szUsername = mUsername.getText().toString();
+                String szPassword = mPassword.getText().toString();
+                presenter.login(szUsername, szPassword);
             }
         });
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ActivityRegister.class);
-                startActivity(intent);
+                onRegisterRequest();
             }
         });
+    }
+
+    @Override
+    public void onSuccessfulLogin() {
+        Intent intent = new Intent(mContext, ActivityHome.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFailedLogin() {
+
+    }
+
+    @Override
+    public void onRegisterRequest() {
+        Intent intent = new Intent(mContext, ActivityRegister.class);
+        startActivity(intent);
     }
 }
