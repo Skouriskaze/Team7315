@@ -12,6 +12,12 @@ public interface ContractLogin {
     }
 
     interface Presenter {
+        /**
+         * Checks whether given credentials are valid
+         * @param username A username
+         * @param password A password
+         * @return True if credentials are valid, false otherwise
+         */
         boolean login(String username, String password);
     }
 }
