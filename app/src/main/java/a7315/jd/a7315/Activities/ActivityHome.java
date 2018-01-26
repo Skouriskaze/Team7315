@@ -20,6 +20,7 @@ import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractHome;
 import a7315.jd.a7315.Items.ItemAid;
+import a7315.jd.a7315.Items.ItemCalendar;
 import a7315.jd.a7315.Presenters.PresenterHome;
 import a7315.jd.a7315.R;
 
@@ -30,6 +31,7 @@ public class ActivityHome extends AppCompatActivity implements ContractHome.View
     Button btnCalculate;
 
     ContractHome.Presenter presenter;
+    BaseAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,8 @@ public class ActivityHome extends AppCompatActivity implements ContractHome.View
             aSummary.add("1/" + i + "|$" + i * 5);
         }
 
-        DateAdapter oDeadlineAdapter = new DateAdapter(this, aDeadlines);
-        DateAdapter oSummaryAdapter = new DateAdapter(this, aSummary);
+        CalendarAdapter oDeadlineAdapter = new CalendarAdapter(this, aDeadlines);
+        CalendarAdapter oSummaryAdapter = new CalendarAdapter(this, aSummary);
         ListView lvDeadline = findViewById(R.id.lvDeadlines);
         ListView lvSummary = findViewById(R.id.lvSummary);
         lvDeadline.setAdapter(oDeadlineAdapter);
@@ -106,7 +108,7 @@ public class ActivityHome extends AppCompatActivity implements ContractHome.View
 
         return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public void setAidItems(List<ItemAid> items) {
 
@@ -117,12 +119,17 @@ public class ActivityHome extends AppCompatActivity implements ContractHome.View
 
     }
 
-    public class DateAdapter extends BaseAdapter {
+    @Override
+    public void setCalendarItems(List<ItemCalendar> cItems){
+        adapter = new CalendarAdapter(this, cItems);
+    }
+
+    public class CalendarAdapter extends BaseAdapter {
         private Context mContext;
         private LayoutInflater mInflater;
-        private List<String> mItems;
+        private List<ItemCalendar> mItems;
 
-        public DateAdapter(Context context, List<String> items) {
+        public CalendarAdapter(Context context, List<ItemCalendar> items) {
             mContext = context;
             mItems = items;
 
