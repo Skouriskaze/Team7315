@@ -115,7 +115,6 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
 
             return view;
 
-            //test comment
         }
     }
 }
