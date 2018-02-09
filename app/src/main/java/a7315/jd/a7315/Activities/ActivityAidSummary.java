@@ -114,6 +114,7 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
             txtDeadline.setText(szName);
 
             return view;
+
         }
     }
 }

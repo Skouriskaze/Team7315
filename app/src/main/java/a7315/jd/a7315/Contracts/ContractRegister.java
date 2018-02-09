@@ -6,7 +6,15 @@ package a7315.jd.a7315.Contracts;
 
 public interface ContractRegister {
     interface View {
+        /**
+         * This is called when a register is completed. Normally, this may log in the user and
+         * moves to the Home Activity.
+         */
         void onRegisterComplete();
+
+        /**
+         * This is called when a login request is made.
+         */
         void onLoginRequest();
 
     }

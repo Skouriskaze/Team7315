@@ -6,8 +6,21 @@ package a7315.jd.a7315.Contracts;
 
 public interface ContractLogin {
     interface View {
+        /**
+         * This function is called on a successful login. Normally, this should create a new Home
+         * Activity, but it may lead to other things such as a temporary server down screen or
+         * similar.
+         */
         void onSuccessfulLogin();
+        /**
+         * This function is called on a failed login. This can be used to notify the user that the
+         * login has failed.
+         */
         void onFailedLogin();
+
+        /**
+         * This function is called when a register request is made.
+         */
         void onRegisterRequest();
     }
 
