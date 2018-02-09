@@ -13,14 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:hint="@string/placeholder"
-            android:visibility="invisible"/>
+            android:hint="@string/placeholder"/>
 
         <EditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:textAlignment="center"
             android:hint="@string/loginUsername"/>
 
@@ -28,9 +26,6 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:nextFocusDown="@id/btnLogin"
-            android:imeOptions="actionDone"
             android:textAlignment="center"
             android:inputType="textPassword"
             android:hint="@string/loginPassword"/>
