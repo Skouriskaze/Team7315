@@ -55,6 +55,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
 
         presenter = new PresenterCostSummary(this);
 
+        // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +64,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
             }
         });
 
+        // Edit button functionality
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +72,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
             }
         });
 
+        // Remove button functionality
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,9 +86,19 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        if (null != name && null != amount) {
+        String error = "";
+        if (null == name || name.equals("")) {
+            error += R.string.nameError + "\n";
+        }
+        if (null == amount || amount.equals("")) {
+            error += R.string.amountError + "\n";
+        }
+        if (error == "") {
             presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
             adapter.notifyDataSetChanged();
+        } else {
+            AppCompatDialogFragment alert = new ErrorDialogFragment();
+            alert.show(getSupportFragmentManager(), "empty_value");
         }
     }
 
