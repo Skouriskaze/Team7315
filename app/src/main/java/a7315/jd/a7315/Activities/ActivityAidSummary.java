@@ -1,9 +1,11 @@
 package a7315.jd.a7315.Activities;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,12 @@ import a7315.jd.a7315.R;
 public class ActivityAidSummary extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener, ContractAidSummary.View{
 
     Button btnAdd;
+    Button btnEdit;
+    Button btnRemove;
     ListView lvAid;
     ContractAidSummary.Presenter presenter;
+
+    private static final String TAG = "ActivityAid";
 
     BaseAdapter adapter;
 
@@ -47,17 +53,36 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
 
 
         btnAdd = findViewById(R.id.btnAdd);
+        btnEdit = findViewById(R.id.btnEdit);
+        btnRemove = findViewById(R.id.btnRemove);
         lvAid = findViewById(R.id.lvAid);
         presenter = new PresenterAidSummary(this);
 
+        // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatDialogFragment frag = new AddAidDialogFragment();
-                frag.show(getSupportFragmentManager(), "add_aid");
+                AppCompatDialogFragment addFrag = new AddAidDialogFragment();
+                addFrag.show(getSupportFragmentManager(), "add_aid");
             }
         });
 
+        // Edit button functionality
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatDialogFragment editFrag;
+            }
+        });
+
+        // Remove button functionality
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatDialogFragment removeFrag = new RemoveDialogFragment();
+                removeFrag.show(getSupportFragmentManager(), "remove_aid");
+            }
+        });
     }
 
     @Override
@@ -65,7 +90,20 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        presenter.addedItem(new ItemAid(name, Float.parseFloat(amount)));
+        String error = "";
+        if (null == name || name.equals("")) {
+            error += R.string.nameError + "\n";
+        }
+        if (null == amount || amount.equals("")) {
+            error += R.string.amountError + "\n";
+        }
+        if (error == "") {
+            presenter.addedItem(new ItemAid(name, Float.parseFloat(amount)));
+            adapter.notifyDataSetChanged();
+        } else {
+           AppCompatDialogFragment alert = new ErrorDialogFragment();
+           alert.show(getSupportFragmentManager(), "empty_value");
+        }
     }
 
     public class DateAdapter extends BaseAdapter {

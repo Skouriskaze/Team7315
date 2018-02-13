@@ -24,6 +24,8 @@ import a7315.jd.a7315.R;
 public class ActivityCostsSummary extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener, ContractCostsSummary.View {
 
     Button btnAdd;
+    Button btnEdit;
+    Button btnRemove;
     ListView lvCost;
 
     BaseAdapter adapter;
@@ -40,12 +42,15 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
     public void updateList() {
         adapter.notifyDataSetChanged();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_costs);
 
         btnAdd = findViewById(R.id.btnAdd);
+        btnEdit = findViewById(R.id.btnEdit);
+        btnRemove = findViewById(R.id.btnRemove);
         lvCost = findViewById(R.id.lvCost);
 
         presenter = new PresenterCostSummary(this);
@@ -57,6 +62,20 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
                 frag.show(getSupportFragmentManager(), "add_aid");
             }
         });
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -64,8 +83,10 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         Map<String, String> map = frag.getInfo();
         String name = map.get("name");
         String amount = map.get("amount");
-        presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
-        adapter.notifyDataSetChanged();
+        if (null != name && null != amount) {
+            presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public class DateAdapter extends BaseAdapter {
