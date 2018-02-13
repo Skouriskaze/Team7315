@@ -97,7 +97,7 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         if (null == amount || amount.equals("")) {
             error += R.string.amountError + "\n";
         }
-        if (error == "") {
+        if (error.equals("")) {
             presenter.addedItem(new ItemAid(name, Float.parseFloat(amount)));
             adapter.notifyDataSetChanged();
         } else {

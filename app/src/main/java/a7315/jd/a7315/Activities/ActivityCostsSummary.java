@@ -93,7 +93,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         if (null == amount || amount.equals("")) {
             error += R.string.amountError + "\n";
         }
-        if (error == "") {
+        if (error.equals("")) {
             presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
             adapter.notifyDataSetChanged();
         } else {
