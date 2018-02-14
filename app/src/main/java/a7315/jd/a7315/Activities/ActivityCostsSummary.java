@@ -87,12 +87,13 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         String name = map.get("name");
         String amount = map.get("amount");
         String error = "";
-        if (null == name || name.equals("")) {
-            error += R.string.nameError + "\n";
-        }
         if (null == amount || amount.equals("")) {
             error += R.string.amountError + "\n";
         }
+        if (null == name || name.equals("")) {
+            error += R.string.nameError + "\n";
+        }
+
         if (error.equals("")) {
             presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
             adapter.notifyDataSetChanged();
