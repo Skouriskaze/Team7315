@@ -39,8 +39,7 @@
     <string name="remove">Remove</string>
 
     <string name="error">Error</string>
-    <string name="nameError">Please add a name.</string>
-    <string name="amountError">Please add an amount.</string>
+    <string name="nameError">Please complete every field</string>
 
     <string name="costTemplate">The cost is $%d </string>
 </resources>

@@ -91,10 +91,10 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         String name = map.get("name");
         String amount = map.get("amount");
         String error = "";
-        if (null == amount || amount.equals("")) {
+        /*if (null == amount || amount.equals("")) {
             error += R.string.amountError + "\n";
-        }
-        if (null == name || name.equals("")) {
+        }*/
+        if (null == name || name.equals("") || null == amount || amount.equals("")) {
             error += R.string.nameError + "\n";
         }
         if (error.equals("")) {

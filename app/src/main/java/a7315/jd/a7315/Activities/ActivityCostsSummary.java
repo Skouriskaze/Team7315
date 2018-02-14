@@ -87,10 +87,8 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         String name = map.get("name");
         String amount = map.get("amount");
         String error = "";
-        if (null == amount || amount.equals("")) {
-            error += R.string.amountError + "\n";
-        }
-        if (null == name || name.equals("")) {
+
+        if (null == name || name.equals("") || null == amount || amount.equals("")) {
             error += R.string.nameError + "\n";
         }
 
