@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,23 +21,11 @@ import a7315.jd.a7315.Presenters.PresenterCostSummary;
 import a7315.jd.a7315.R;
 
 
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-
 
 
 
@@ -82,11 +69,8 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
 
         presenter = new PresenterCostSummary(this);
 
-/*
-        //arr = new ArrayList<String>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.activity_costs, arr);
-        lvCost.setAdapter(adapter);
-*/
+
+        //Remove item from long press listener
         lvCost.setOnItemLongClickListener(new OnItemLongClickListener() {
             // setting onItemLongClickListener and passing the position to the function
             @Override
@@ -97,15 +81,6 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
                 return true;
             }
         });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -141,7 +116,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
 
 
 
-
+    //Prompt to remove item
     protected void removeItemFromList(int position) {
         final int deletePosition = position;
 
@@ -153,37 +128,19 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         alert.setPositiveButton("YES", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TOD O Auto-generated method stub
-
-                // main code on after clicking yes
                 arr.remove(deletePosition);
                 adapter.notifyDataSetChanged();
                 adapter.notifyDataSetInvalidated();
-
             }
         });
         alert.setNegativeButton("CANCEL", new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
                 dialog.dismiss();
             }
         });
-
         alert.show();
-
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
