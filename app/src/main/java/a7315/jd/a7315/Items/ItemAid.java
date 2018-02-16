@@ -1,10 +1,12 @@
 package a7315.jd.a7315.Items;
 
+import java.io.Serializable;
+
 /**
  * Created by Jesse on 1/22/2018.
  */
 
-public class ItemAid {
+public class ItemAid implements Serializable {
     private String title;
     private float amount;
 

@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +31,7 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
     Button btnRemove;
     ListView lvAid;
     ContractAidSummary.Presenter presenter;
+    String FILENAME = "aid_data";
 
     private static final String TAG = "ActivityAid";
 
@@ -50,8 +53,6 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aid);
-
-
         btnAdd = findViewById(R.id.btnAdd);
         btnEdit = findViewById(R.id.btnEdit);
         btnRemove = findViewById(R.id.btnRemove);
@@ -99,6 +100,7 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         }
         if (error.equals("")) {
             presenter.addedItem(new ItemAid(name, Float.parseFloat(amount)));
+
             adapter.notifyDataSetChanged();
         } else {
            AppCompatDialogFragment alert = new ErrorDialogFragment();
