@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractAidSummary;
 import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Presenters.PresenterAidSummary;
@@ -27,8 +26,6 @@ import a7315.jd.a7315.R;
 public class ActivityAidSummary extends AppCompatActivity implements ContractAidSummary.View{
 
     Button btnAdd;
-    Button btnEdit;
-    Button btnRemove;
     ListView lvAid;
     ContractAidSummary.Presenter presenter;
 
@@ -54,8 +51,6 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
 
 
         btnAdd = findViewById(R.id.btnAdd);
-        btnEdit = findViewById(R.id.btnEdit);
-        btnRemove = findViewById(R.id.btnRemove);
         lvAid = findViewById(R.id.lvAid);
         presenter = new PresenterAidSummary(this, this);
 
@@ -107,26 +102,34 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatDialogFragment addFrag = new AddAidDialogFragment();
-                addFrag.show(getSupportFragmentManager(), "add_aid");
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View v = inflater.inflate(R.layout.dialog_aid, null);
+
+                final EditText etName = v.findViewById(R.id.etName);
+                final EditText etAmount = v.findViewById(R.id.etAmount);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(context)
+                        .setView(v)
+                        .setTitle("Add Aid")
+                        .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ItemAid item = new ItemAid(etName.getText().toString(),
+                                        Float.parseFloat(etAmount.getText().toString()));
+                                presenter.addedItem(item);
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+                alert.create();
+                alert.show();
             }
         });
-    }
-
-    @Override
-    public void onAdd(AidDialog frag) {
-        ItemAid item = frag.getInfo();
-        presenter.addedItem(item);
-    }
-
-    @Override
-    public void onEdit(AidDialog dialog) {
-
-    }
-
-    @Override
-    public void onRemove(AidDialog dialog) {
-
     }
 
     public class DateAdapter extends BaseAdapter {

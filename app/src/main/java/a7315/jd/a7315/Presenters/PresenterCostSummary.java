@@ -7,7 +7,6 @@ import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractAidSummary;
 import a7315.jd.a7315.Contracts.ContractCostsSummary;
-import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 import a7315.jd.a7315.Models.DummyData;
 import a7315.jd.a7315.Models.ModelData;
@@ -30,6 +29,23 @@ public class PresenterCostSummary implements ContractCostsSummary.Presenter {
     @Override
     public void addedItem(ItemCost item) {
         data.addCostItem(item);
+
+        view.updateList();
+    }
+
+    @Override
+    public void editedItem(int itemIndex, String newName, Float newValue) {
+        ItemCost item = data.getCostItems().get(itemIndex);
+        item.setTitle(newName);
+        item.setAmount(newValue);
+
+        view.updateList();
+    }
+
+    @Override
+    public void removedItem(int itemIndex) {
+        data.removeCostItem(itemIndex);
+
         view.updateList();
     }
 }

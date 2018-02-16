@@ -22,12 +22,6 @@ public interface ContractAidSummary {
          * item.
          */
         void updateList();
-
-        void onAdd(AidDialog dialog);
-
-        void onEdit(AidDialog dialog);
-
-        void onRemove(AidDialog dialog);
     }
 
     interface Presenter {

@@ -1,23 +1,23 @@
 package a7315.jd.a7315.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractCostsSummary;
-import a7315.jd.a7315.Contracts.CostDialog;
-import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 import a7315.jd.a7315.Presenters.PresenterCostSummary;
 import a7315.jd.a7315.R;
@@ -26,12 +26,11 @@ import a7315.jd.a7315.R;
 public class ActivityCostsSummary extends AppCompatActivity implements ContractCostsSummary.View {
 
     Button btnAdd;
-    Button btnEdit;
-    Button btnRemove;
     ListView lvCost;
 
     BaseAdapter adapter;
     ContractCostsSummary.Presenter presenter;
+    final Context context = this;
 
     @Override
     public void setItems(List<ItemCost> items) {
@@ -51,52 +50,88 @@ public class ActivityCostsSummary extends AppCompatActivity implements ContractC
         setContentView(R.layout.activity_costs);
 
         btnAdd = findViewById(R.id.btnAdd);
-        btnEdit = findViewById(R.id.btnEdit);
-        btnRemove = findViewById(R.id.btnRemove);
         lvCost = findViewById(R.id.lvCost);
 
         presenter = new PresenterCostSummary(this, this);
+
+        // Click on list item to edit/remove
+        lvCost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final int index = i;
+                ItemCost item = (ItemCost) adapterView.getItemAtPosition(index);
+
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View v = inflater.inflate(R.layout.dialog_cost,null);
+
+                final EditText etName = v.findViewById(R.id.etName);
+                final EditText etAmount = v.findViewById(R.id.etAmount);
+
+                etName.setText(item.getTitle());
+                etAmount.setText(String.valueOf(item.getAmount()));
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(context)
+                        .setView(v)
+                        .setTitle("Edit Cost")
+                        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.editedItem(index, etName.getText().toString(),
+                                        Float.parseFloat(etAmount.getText().toString()));
+                            }
+                        })
+                        .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.remove, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.removedItem(index);
+                            }
+                        });
+
+                alert.create();
+                alert.show();
+            }
+        });
 
         // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatDialogFragment frag = new AddAidDialogFragment();
-                frag.show(getSupportFragmentManager(), "add_aid");
+
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View v = inflater.inflate(R.layout.dialog_cost, null);
+
+                final EditText etName = v.findViewById(R.id.etName);
+                final EditText etAmount = v.findViewById(R.id.etAmount);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(context)
+                        .setView(v)
+                        .setTitle("Add Cost")
+                        .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ItemCost item = new ItemCost(etName.getText().toString(),
+                                        Float.parseFloat(etAmount.getText().toString()));
+                                presenter.addedItem(item);
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+
+                alert.create();
+                alert.show();
             }
         });
-
-        // Edit button functionality
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        // Remove button functionality
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onAdd(AidDialog frag) {
-//        ItemCost item = frag.getInfo();
-//        presenter.addedItem(item);
-    }
-
-    @Override
-    public void onEdit(AidDialog dialog) {
-
-    }
-
-    @Override
-    public void onRemove(AidDialog dialog) {
-
     }
 
     public class DateAdapter extends BaseAdapter {
