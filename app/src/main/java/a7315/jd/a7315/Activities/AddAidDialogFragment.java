@@ -19,6 +19,8 @@ import a7315.jd.a7315.R;
  * Edited to include AidDialog on 2/14/2018
  */
 
+//TODO Remove this class by simplifying and integrating it in ActivityAidSummary
+
 public class AddAidDialogFragment extends AppCompatDialogFragment implements AidDialog {
     EditText etName;
     EditText etAmount;

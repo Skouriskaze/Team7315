@@ -115,24 +115,6 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
                 addFrag.show(getSupportFragmentManager(), "add_aid");
             }
         });
-
-        // Edit button functionality
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppCompatDialogFragment editFrag = new EditAidDialogFragment();
-                editFrag.show(getSupportFragmentManager(), "edit_aid");
-            }
-        });
-
-        // Remove button functionality
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppCompatDialogFragment removeFrag = new RemoveDialogFragment();
-                removeFrag.show(getSupportFragmentManager(), "remove_aid");
-            }
-        });
     }
 
     @Override
