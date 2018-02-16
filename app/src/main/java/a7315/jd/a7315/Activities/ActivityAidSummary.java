@@ -27,8 +27,6 @@ import a7315.jd.a7315.R;
 public class ActivityAidSummary extends AppCompatActivity implements ContractAidSummary.View{
 
     Button btnAdd;
-    Button btnEdit;
-    Button btnRemove;
     ListView lvAid;
     ContractAidSummary.Presenter presenter;
 
@@ -54,8 +52,6 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
 
 
         btnAdd = findViewById(R.id.btnAdd);
-        btnEdit = findViewById(R.id.btnEdit);
-        btnRemove = findViewById(R.id.btnRemove);
         lvAid = findViewById(R.id.lvAid);
         presenter = new PresenterAidSummary(this);
 
