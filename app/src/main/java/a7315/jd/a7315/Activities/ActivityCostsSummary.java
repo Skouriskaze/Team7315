@@ -13,30 +13,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
+import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractCostsSummary;
+import a7315.jd.a7315.Contracts.CostDialog;
+import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 import a7315.jd.a7315.Presenters.PresenterCostSummary;
 import a7315.jd.a7315.R;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
-
-
-
-
-public class ActivityCostsSummary extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener, ContractCostsSummary.View {
+public class ActivityCostsSummary extends AppCompatActivity implements ContractCostsSummary.View {
 
     Button btnAdd;
     Button btnEdit;
     Button btnRemove;
     ListView lvCost;
-    List<ItemCost> arr;
 
     BaseAdapter adapter;
     ContractCostsSummary.Presenter presenter;
@@ -46,10 +38,6 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         adapter = new DateAdapter(this, items);
         adapter.notifyDataSetChanged();
         lvCost.setAdapter(adapter);
-
-
-
-        arr = items;
     }
 
     @Override
@@ -68,24 +56,6 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         lvCost = findViewById(R.id.lvCost);
 
         presenter = new PresenterCostSummary(this);
-
-
-        //Remove item from long press listener
-        lvCost.setOnItemLongClickListener(new OnItemLongClickListener() {
-            // setting onItemLongClickListener and passing the position to the function
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int position, long arg3) {
-                removeItemFromList(position);
-
-                return true;
-            }
-        });
-
-
-
-
-
 
         // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -113,57 +83,20 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
         });
     }
 
-
-
-
-    //Prompt to remove item
-    protected void removeItemFromList(int position) {
-        final int deletePosition = position;
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(
-                ActivityCostsSummary.this);
-
-        alert.setTitle("Delete");
-        alert.setMessage("Do you want delete this item?");
-        alert.setPositiveButton("YES", new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                arr.remove(deletePosition);
-                adapter.notifyDataSetChanged();
-                adapter.notifyDataSetInvalidated();
-            }
-        });
-        alert.setNegativeButton("CANCEL", new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        alert.show();
+    @Override
+    public void onAdd(AidDialog frag) {
+//        ItemCost item = frag.getInfo();
+//        presenter.addedItem(item);
     }
 
+    @Override
+    public void onEdit(AidDialog dialog) {
 
-
-
+    }
 
     @Override
-    public void onAdd(AddDialog frag) {
-        Map<String, String> map = frag.getInfo();
-        String name = map.get("name");
-        String amount = map.get("amount");
-        String error = "";
+    public void onRemove(AidDialog dialog) {
 
-        if (null == name || name.equals("") || null == amount || amount.equals("")) {
-            error += R.string.nameError + "\n";
-        }
-
-        if (error.equals("")) {
-            presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
-            adapter.notifyDataSetChanged();
-        } else {
-            AppCompatDialogFragment alert = new ErrorDialogFragment();
-            alert.show(getSupportFragmentManager(), "empty_value");
-        }
     }
 
     public class DateAdapter extends BaseAdapter {

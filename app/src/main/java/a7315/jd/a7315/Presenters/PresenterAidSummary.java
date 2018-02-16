@@ -30,4 +30,20 @@ public class PresenterAidSummary implements ContractAidSummary.Presenter {
 
         view.updateList();
     }
+
+    @Override
+    public void editedItem(int itemIndex, String newName, Float newValue) {
+        ItemAid item = aItems.get(itemIndex);
+        item.setTitle(newName);
+        item.setAmount(newValue);
+
+        view.updateList();
+    }
+
+    @Override
+    public void removedItem(int itemIndex) {
+        aItems.remove(itemIndex);
+
+        view.updateList();
+    }
 }
