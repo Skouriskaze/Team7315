@@ -161,10 +161,11 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View view, ViewGroup parent) {
             // Get view for row item
-            // TODO: Fix this inflater issue
-            View view = mInflater.inflate(R.layout.list_item_deadline, parent, false);
+            if (view == null) {
+                view = mInflater.inflate(R.layout.list_item_deadline, parent, false);
+            }
 
             ItemAid item = getItem(position);
 
