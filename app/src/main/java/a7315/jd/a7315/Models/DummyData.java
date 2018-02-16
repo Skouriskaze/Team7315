@@ -1,8 +1,13 @@
 package a7315.jd.a7315.Models;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import a7315.jd.a7315.Activities.InternalStorage;
 import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 
@@ -14,10 +19,25 @@ public class DummyData implements ModelData {
 
     private static List<ItemAid> aidItems = new ArrayList<>();
     private static List<ItemCost> costItems = new ArrayList<>();
+    private Context context;
+
+    private List<ItemAid> aAidItems;
+    public DummyData(Context context) {
+        this.context = context;
+        aAidItems = new ArrayList<>();
+
+        try {
+            Object o = InternalStorage.readObject(context, "aid.data");
+            aAidItems = (List<ItemAid>) o;
+
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<ItemAid> getAidItems() {
-        return DummyData.getStaticAidList();
+        return aAidItems;
     }
 
     private static List<ItemAid> getStaticAidList() {
@@ -31,18 +51,36 @@ public class DummyData implements ModelData {
 
     @Override
     public void addAidItem(ItemAid item) {
-        DummyData.addStaticAidItem(item);
+        aAidItems.add(item);
+        try {
+            InternalStorage.writeObject(context, "aid.data", aAidItems);
+        } catch (IOException e) {
+            Log.e("HELP", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void editAidItem(int index, String name, float amount) {
         aidItems.get(index).setTitle(name);
         aidItems.get(index).setAmount(amount);
+        try {
+            InternalStorage.writeObject(context, "aid.data", aAidItems);
+        } catch (IOException e) {
+            Log.e("HELP", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void removeAidItem(int index) {
         aidItems.remove(index);
+        try {
+            InternalStorage.writeObject(context, "aid.data", aAidItems);
+        } catch (IOException e) {
+            Log.e("HELP", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override

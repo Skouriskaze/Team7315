@@ -57,7 +57,7 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
         btnEdit = findViewById(R.id.btnEdit);
         btnRemove = findViewById(R.id.btnRemove);
         lvAid = findViewById(R.id.lvAid);
-        presenter = new PresenterAidSummary(this);
+        presenter = new PresenterAidSummary(this, this);
 
         lvAid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

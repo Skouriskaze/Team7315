@@ -1,10 +1,14 @@
 package a7315.jd.a7315.Presenters;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractAidSummary;
 import a7315.jd.a7315.Items.ItemAid;
+import a7315.jd.a7315.Models.DummyData;
+import a7315.jd.a7315.Models.ModelData;
 
 /**
  * Created by Jesse on 1/22/2018.
@@ -13,27 +17,23 @@ import a7315.jd.a7315.Items.ItemAid;
 public class PresenterAidSummary implements ContractAidSummary.Presenter {
 
     ContractAidSummary.View view;
-    List<ItemAid> aItems;
+    private ModelData data;
 
-    public PresenterAidSummary(ContractAidSummary.View view) {
+    public PresenterAidSummary(ContractAidSummary.View view, Context context) {
         this.view = view;
-        aItems = new ArrayList<>();
-        aItems.add(new ItemAid("HOPE", 5000));
-        aItems.add(new ItemAid("Misc", 2000));
-        aItems.add(new ItemAid("More Misc", 2000));
-        view.setItems(aItems);
+        data = new DummyData(context);
+        view.setItems(data.getAidItems());
     }
 
     @Override
     public void addedItem(ItemAid item) {
-        aItems.add(item);
-
+        data.addAidItem(item);
         view.updateList();
     }
 
     @Override
     public void editedItem(int itemIndex, String newName, Float newValue) {
-        ItemAid item = aItems.get(itemIndex);
+        ItemAid item = data.getAidItems().get(itemIndex);
         item.setTitle(newName);
         item.setAmount(newValue);
 
@@ -42,8 +42,7 @@ public class PresenterAidSummary implements ContractAidSummary.Presenter {
 
     @Override
     public void removedItem(int itemIndex) {
-        aItems.remove(itemIndex);
-
+        data.getAidItems().remove(itemIndex);
         view.updateList();
     }
 }

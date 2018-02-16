@@ -1,5 +1,7 @@
 package a7315.jd.a7315.Presenters;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +21,9 @@ public class PresenterCostSummary implements ContractCostsSummary.Presenter {
     private ContractCostsSummary.View view;
     private ModelData data;
 
-    public PresenterCostSummary(ContractCostsSummary.View view) {
+    public PresenterCostSummary(ContractCostsSummary.View view, Context context) {
         this.view = view;
-        data = new DummyData();
+        data = new DummyData(context);
         view.setItems(data.getCostItems());
     }
 

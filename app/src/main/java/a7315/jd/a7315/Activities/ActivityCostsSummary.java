@@ -55,7 +55,7 @@ public class ActivityCostsSummary extends AppCompatActivity implements ContractC
         btnRemove = findViewById(R.id.btnRemove);
         lvCost = findViewById(R.id.lvCost);
 
-        presenter = new PresenterCostSummary(this);
+        presenter = new PresenterCostSummary(this, this);
 
         // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
