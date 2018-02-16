@@ -31,18 +31,6 @@
             android:layout_height="wrap_content"
             android:text="@string/add"
             android:layout_weight="1"/>
-        <Button
-            android:id="@+id/btnEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/editButton"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/btnRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/removeButton"
-            android:layout_weight="1"/>
 
     </LinearLayout>
 

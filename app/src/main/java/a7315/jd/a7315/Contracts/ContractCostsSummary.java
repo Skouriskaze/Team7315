@@ -23,19 +23,27 @@ public interface ContractCostsSummary {
          * item.
          */
         void updateList();
-
-        void onAdd(AidDialog dialog);
-
-        void onEdit(AidDialog dialog);
-
-        void onRemove(AidDialog dialog);
     }
 
     interface Presenter {
         /**
          * Tells the presenter to add an item to the item list.
-         * @param item
+         * @param item The item
          */
         void addedItem(ItemCost item);
+
+        /**
+         * Tells the presenter to edit an item in the item list.
+         * @param itemIndex The index of the item to edit
+         * @param newName The updated item name
+         * @param newValue The updated item value
+         */
+        void editedItem(int itemIndex, String newName, Float newValue);
+
+        /**
+         * Tells the presenter to
+         * @param itemIndex The index of the item to remove
+         */
+        void removedItem(int itemIndex);
     }
 }

@@ -14,8 +14,8 @@ import a7315.jd.a7315.Items.ItemCost;
 
 public class PresenterCostSummary implements ContractCostsSummary.Presenter {
 
-    ContractCostsSummary.View view;
-    List<ItemCost> aItems;
+    private ContractCostsSummary.View view;
+    private List<ItemCost> aItems;
 
     public PresenterCostSummary(ContractCostsSummary.View view) {
         this.view = view;
@@ -29,6 +29,22 @@ public class PresenterCostSummary implements ContractCostsSummary.Presenter {
     @Override
     public void addedItem(ItemCost item) {
         aItems.add(item);
+
+        view.updateList();
+    }
+
+    @Override
+    public void editedItem(int itemIndex, String newName, Float newValue) {
+        ItemCost item = aItems.get(itemIndex);
+        item.setTitle(newName);
+        item.setAmount(newValue);
+
+        view.updateList();
+    }
+
+    @Override
+    public void removedItem(int itemIndex) {
+        aItems.remove(itemIndex);
 
         view.updateList();
     }
