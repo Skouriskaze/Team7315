@@ -6,7 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
 import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractAidSummary;
@@ -33,8 +31,6 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
     Button btnRemove;
     ListView lvAid;
     ContractAidSummary.Presenter presenter;
-
-    private static final String TAG = "ActivityAid";
 
     BaseAdapter adapter;
     final Context context = this;
