@@ -12,6 +12,8 @@
         style="?android:listSeparatorTextViewStyle"
         android:text="@string/costLabel"/>
 
+
+
     <ListView
         android:id="@+id/lvCost"
         android:layout_weight="1"
