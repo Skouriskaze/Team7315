@@ -7,6 +7,8 @@ import a7315.jd.a7315.Contracts.ContractAidSummary;
 import a7315.jd.a7315.Contracts.ContractCostsSummary;
 import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
+import a7315.jd.a7315.Models.DummyData;
+import a7315.jd.a7315.Models.ModelData;
 
 /**
  * Created by Jesse on 1/22/2018.
@@ -14,22 +16,18 @@ import a7315.jd.a7315.Items.ItemCost;
 
 public class PresenterCostSummary implements ContractCostsSummary.Presenter {
 
-    ContractCostsSummary.View view;
-    List<ItemCost> aItems;
+    private ContractCostsSummary.View view;
+    private ModelData data;
 
     public PresenterCostSummary(ContractCostsSummary.View view) {
         this.view = view;
-        aItems = new ArrayList<>();
-        aItems.add(new ItemCost("Tuition", 5000));
-        aItems.add(new ItemCost("Housing", 2000));
-        aItems.add(new ItemCost("Misc", 2000));
-        view.setItems(aItems);
+        data = new DummyData();
+        view.setItems(data.getCostItems());
     }
 
     @Override
     public void addedItem(ItemCost item) {
-        aItems.add(item);
-
+        data.addCostItem(item);
         view.updateList();
     }
 }
