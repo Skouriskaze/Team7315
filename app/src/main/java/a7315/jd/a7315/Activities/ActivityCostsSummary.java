@@ -16,12 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractCostsSummary;
+import a7315.jd.a7315.Contracts.CostDialog;
+import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 import a7315.jd.a7315.Presenters.PresenterCostSummary;
 import a7315.jd.a7315.R;
 
-public class ActivityCostsSummary extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener, ContractCostsSummary.View {
+public class ActivityCostsSummary extends AppCompatActivity implements ContractCostsSummary.View {
 
     Button btnAdd;
     Button btnEdit;
@@ -82,23 +85,19 @@ public class ActivityCostsSummary extends AppCompatActivity implements AddAidDia
     }
 
     @Override
-    public void onAdd(AddDialog frag) {
-        Map<String, String> map = frag.getInfo();
-        String name = map.get("name");
-        String amount = map.get("amount");
-        String error = "";
+    public void onAdd(AidDialog frag) {
+//        ItemCost item = frag.getInfo();
+//        presenter.addedItem(item);
+    }
 
-        if (null == name || name.equals("") || null == amount || amount.equals("")) {
-            error += R.string.nameError + "\n";
-        }
+    @Override
+    public void onEdit(AidDialog dialog) {
 
-        if (error.equals("")) {
-            presenter.addedItem(new ItemCost(name, Float.parseFloat(amount)));
-            adapter.notifyDataSetChanged();
-        } else {
-            AppCompatDialogFragment alert = new ErrorDialogFragment();
-            alert.show(getSupportFragmentManager(), "empty_value");
-        }
+    }
+
+    @Override
+    public void onRemove(AidDialog dialog) {
+
     }
 
     public class DateAdapter extends BaseAdapter {

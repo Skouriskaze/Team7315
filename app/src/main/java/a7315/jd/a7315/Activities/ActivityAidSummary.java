@@ -9,20 +9,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.Map;
 
+import a7315.jd.a7315.Contracts.AidDialog;
 import a7315.jd.a7315.Contracts.ContractAidSummary;
 import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Presenters.PresenterAidSummary;
 import a7315.jd.a7315.R;
 
-public class ActivityAidSummary extends AppCompatActivity implements AddAidDialogFragment.AddDialogListener, ContractAidSummary.View{
+public class ActivityAidSummary extends AppCompatActivity implements ContractAidSummary.View{
 
     Button btnAdd;
     Button btnEdit;
@@ -58,6 +61,24 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         lvAid = findViewById(R.id.lvAid);
         presenter = new PresenterAidSummary(this);
 
+        lvAid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ItemAid item = (ItemAid) adapterView.getItemAtPosition(i);
+                AppCompatDialogFragment editFrag = new EditAidDialogFragment();
+
+                EditText etName = editFrag.getDialog().findViewById(R.id.etName);
+                EditText etAmount = editFrag.getDialog().findViewById(R.id.etAmount);
+
+                etName.setText(item.getTitle());
+                etAmount.setText(String.valueOf(item.getAmount()));
+
+                editFrag.show(getSupportFragmentManager(), "edit_aid");
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         // Add button functionality
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +92,8 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatDialogFragment editFrag;
+                AppCompatDialogFragment editFrag = new EditAidDialogFragment();
+                editFrag.show(getSupportFragmentManager(), "edit_aid");
             }
         });
 
@@ -86,24 +108,19 @@ public class ActivityAidSummary extends AppCompatActivity implements AddAidDialo
     }
 
     @Override
-    public void onAdd(AddDialog frag) {
-        Map<String, String> map = frag.getInfo();
-        String name = map.get("name");
-        String amount = map.get("amount");
-        String error = "";
-        /*if (null == amount || amount.equals("")) {
-            error += R.string.amountError + "\n";
-        }*/
-        if (null == name || name.equals("") || null == amount || amount.equals("")) {
-            error += R.string.nameError + "\n";
-        }
-        if (error.equals("")) {
-            presenter.addedItem(new ItemAid(name, Float.parseFloat(amount)));
-            adapter.notifyDataSetChanged();
-        } else {
-           AppCompatDialogFragment alert = new ErrorDialogFragment();
-           alert.show(getSupportFragmentManager(), "empty_value");
-        }
+    public void onAdd(AidDialog frag) {
+        ItemAid item = frag.getInfo();
+        presenter.addedItem(item);
+    }
+
+    @Override
+    public void onEdit(AidDialog dialog) {
+
+    }
+
+    @Override
+    public void onRemove(AidDialog dialog) {
+
     }
 
     public class DateAdapter extends BaseAdapter {
