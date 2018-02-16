@@ -38,6 +38,7 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="remove">Remove</string>
+    <string name="confirm">Confirm</string>
 
     <string name="error">Error</string>
     <string name="nameError">Please complete every field</string>

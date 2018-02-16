@@ -1,6 +1,7 @@
 package a7315.jd.a7315.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
     private static final String TAG = "ActivityAid";
 
     BaseAdapter adapter;
+    final Context context = this;
 
     @Override
     public void setItems(List<ItemAid> items) {
@@ -64,18 +66,44 @@ public class ActivityAidSummary extends AppCompatActivity implements ContractAid
         lvAid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ItemAid item = (ItemAid) adapterView.getItemAtPosition(i);
-                AppCompatDialogFragment editFrag = new EditAidDialogFragment();
 
-                EditText etName = editFrag.getDialog().findViewById(R.id.etName);
-                EditText etAmount = editFrag.getDialog().findViewById(R.id.etAmount);
+                final int index = i;
+                ItemAid item = (ItemAid) adapterView.getItemAtPosition(index);
+
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View v = inflater.inflate(R.layout.dialog_aid, null);
+
+                final EditText etName = v.findViewById(R.id.etName);
+                final EditText etAmount = v.findViewById(R.id.etAmount);
 
                 etName.setText(item.getTitle());
                 etAmount.setText(String.valueOf(item.getAmount()));
 
-                editFrag.show(getSupportFragmentManager(), "edit_aid");
+                AlertDialog.Builder alert = new AlertDialog.Builder(context)
+                        .setView(v)
+                        .setTitle("Edit Aid")
+                        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.editedItem(index, etName.getText().toString(),
+                                        Float.parseFloat(etAmount.getText().toString()));
+                            }
+                        })
+                        .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(R.string.remove, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.removedItem(index);
+                            }
+                        });
+
+                alert.create();
+                alert.show();
             }
         });
 
