@@ -12,23 +12,28 @@ import a7315.jd.a7315.Items.ItemAid;
 import a7315.jd.a7315.Items.ItemCost;
 
 /**
- * Created by Jesse on 2/15/2018.
+ * Created by Jon on 2/18/2018.
  */
 
-public class DummyData implements ModelData {
+public class LocalStorageData implements ModelData {
 
-    private static List<ItemAid> aidItems = new ArrayList<>();
-    private static List<ItemCost> costItems = new ArrayList<>();
+    // LSD == LocalStorageData
+
     private Context context;
 
     private List<ItemAid> aAidItems;
-    public DummyData(Context context) {
+    private List<ItemCost> aCostItems;
+
+    public LocalStorageData(Context context) {
         this.context = context;
         aAidItems = new ArrayList<>();
+        aCostItems = new ArrayList<>();
 
         try {
-            Object o = InternalStorage.readObject(context, "aid.data");
-            aAidItems = (List<ItemAid>) o;
+            Object a = InternalStorage.readObject(context, "aid.data");
+            aAidItems = (List<ItemAid>) a;
+            Object c = InternalStorage.readObject(context, "cost.data");
+            aCostItems = (List<ItemCost>) c;
 
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
@@ -40,13 +45,9 @@ public class DummyData implements ModelData {
         return aAidItems;
     }
 
-    private static List<ItemAid> getStaticAidList() {
-        if (aidItems.size() == 0) {
-            aidItems.add(new ItemAid("HOPE", 5000));
-            aidItems.add(new ItemAid("Misc", 2000));
-            aidItems.add(new ItemAid("More Misc", 2000));
-        }
-        return aidItems;
+    @Override
+    public List<ItemCost> getCostItems() {
+        return aCostItems;
     }
 
     @Override
@@ -55,68 +56,66 @@ public class DummyData implements ModelData {
         try {
             InternalStorage.writeObject(context, "aid.data", aAidItems);
         } catch (IOException e) {
-            Log.e("HELP", e.getMessage());
+            Log.e("LSD.addAid", e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public void editAidItem(int index, String name, float amount) {
-        aidItems.get(index).setTitle(name);
-        aidItems.get(index).setAmount(amount);
+        aAidItems.get(index).setTitle(name);
+        aAidItems.get(index).setAmount(amount);
         try {
             InternalStorage.writeObject(context, "aid.data", aAidItems);
         } catch (IOException e) {
-            Log.e("HELP", e.getMessage());
+            Log.e("LSD.editAid", e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public void removeAidItem(int index) {
-        aidItems.remove(index);
+        aAidItems.remove(index);
         try {
             InternalStorage.writeObject(context, "aid.data", aAidItems);
         } catch (IOException e) {
-            Log.e("HELP", e.getMessage());
+            Log.e("LSD.removeAid", e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
-    public List<ItemCost> getCostItems() {
-        return DummyData.getStaticCostList();
-    }
-
-    @Override
     public void addCostItem(ItemCost item) {
-        addStaticCostItem(item);
+        aCostItems.add(item);
+        try {
+            InternalStorage.writeObject(context, "cost.data", aCostItems);
+        } catch (IOException e) {
+            Log.e("LSD.addCost", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void editCostItem(int index, String name, float amount) {
-        costItems.get(index).setTitle(name);
-        costItems.get(index).setAmount(amount);
+        aCostItems.get(index).setTitle(name);
+        aCostItems.get(index).setAmount(amount);
+        try {
+            InternalStorage.writeObject(context, "cost.data", aCostItems);
+        } catch (IOException e) {
+            Log.e("LSD.editCost", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void removeCostItem(int index) {
-        costItems.remove(index);
-    }
-
-
-    private static List<ItemCost> getStaticCostList() {
-        if (costItems.size() == 0) {
-            costItems.add(new ItemCost("Tuition", 5000));
-            costItems.add(new ItemCost("Housing", 2000));
-            costItems.add(new ItemCost("Misc", 2000));
+        aCostItems.remove(index);
+        try {
+            InternalStorage.writeObject(context, "cost.data", aCostItems);
+        } catch (IOException e) {
+            Log.e("LSD.removeCost", e.getMessage());
+            e.printStackTrace();
         }
-        return costItems;
-    }
-    private static void addStaticAidItem(ItemAid item) {
-        aidItems.add(item);
-    }
-    private static void addStaticCostItem(ItemCost item){
-        costItems.add(item);
     }
 }
+

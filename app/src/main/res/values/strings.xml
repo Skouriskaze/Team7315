@@ -43,5 +43,8 @@
     <string name="error">Error</string>
     <string name="nameError">Please complete every field</string>
 
+    <string name="noAid">You have no aid.</string>
+    <string name="noCost">You have no costs.</string>
+
     <string name="costTemplate">The cost is $%d </string>
 </resources>
