@@ -138,6 +138,8 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
                 }
             });
 
+            cbItem.setChecked(mItems.get(position).isActive());
+
             float szAmount = item.getAmount();
             String szName = item.getTitle();
             cbItem.setText(szName);
