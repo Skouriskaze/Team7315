@@ -46,5 +46,5 @@
     <string name="noAid">You have no aid.</string>
     <string name="noCost">You have no costs.</string>
 
-    <string name="costTemplate">The cost is $%d </string>
+    <string name="costTemplate">The cost is $%f </string>
 </resources>

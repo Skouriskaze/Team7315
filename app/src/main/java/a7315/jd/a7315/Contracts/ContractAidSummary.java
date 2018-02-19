@@ -27,7 +27,7 @@ public interface ContractAidSummary {
     interface Presenter {
         /**
          * Tells the presenter to add an item to the item list.
-         * @param item
+         * @param item the item that is to be added
          */
         void addedItem(ItemAid item);
 

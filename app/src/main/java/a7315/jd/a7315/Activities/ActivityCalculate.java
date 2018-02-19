@@ -4,19 +4,25 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractCalculate;
+import a7315.jd.a7315.Items.ItemAid;
+import a7315.jd.a7315.Items.ItemCost;
+import a7315.jd.a7315.Items.ItemFinancials;
 import a7315.jd.a7315.Presenters.PresenterCalculate;
 import a7315.jd.a7315.R;
 
@@ -29,50 +35,66 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
 
     ContractCalculate.Presenter presenter;
 
+    CheckBoxAdapter adapterAid;
+    CheckBoxAdapter adapterCost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate);
 
-        presenter = new PresenterCalculate(this);
 
         btnCalculate = findViewById(R.id.btnCalculate);
         lvCost = findViewById(R.id.lvCost);
         lvAid = findViewById(R.id.lvAid);
         txtResult = findViewById(R.id.txtResult);
 
-        List<String> aAidItems = new ArrayList<>();
-        List<String> aCostItems = new ArrayList<>();
-
-        aAidItems.add("$5,000|HOPE");
-        aAidItems.add("$2,000|Misc");
-        aAidItems.add("$2,000|More Misc");
-
-        aCostItems.add("$5,000|Tuition");
-        aCostItems.add("$2,000|Housing");
-        aCostItems.add("$2,000|Misc");
-
-        BaseAdapter adapterAid = new CheckBoxAdapter(this, aAidItems);
-        BaseAdapter adapterCost = new CheckBoxAdapter(this, aCostItems);
-
-        lvCost.setAdapter(adapterCost);
-        lvAid.setAdapter(adapterAid);
-
+        presenter = new PresenterCalculate(this, this);
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtResult.setText(getResources().getString(R.string.costTemplate, 1000));
+                float net = presenter.calculate();
+                displayNet(net);
             }
         });
+    }
+
+    @Override
+    public void setAidItems(List<ItemAid> items) {
+        adapterAid = new CheckBoxAdapter(this, items);
+        adapterAid.notifyDataSetChanged();
+        lvAid.setAdapter(adapterAid);
+    }
+
+    @Override
+    public void updateAidList() {
+        adapterAid.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setCostItems(List<ItemCost> items) {
+        adapterCost = new CheckBoxAdapter(this, items);
+        adapterCost.notifyDataSetChanged();
+        lvCost.setAdapter(adapterCost);
+    }
+
+    @Override
+    public void updateCostList() {
+        adapterCost.notifyDataSetChanged();
+    }
+
+    @Override
+    public void displayNet(float net) {
+        txtResult.setText(getResources().getString(R.string.costTemplate, net));
     }
 
     public class CheckBoxAdapter extends BaseAdapter {
         private Context mContext;
         private LayoutInflater mInflater;
-        private List<String> mItems;
+        private List<? extends ItemFinancials> mItems;
 
-        public CheckBoxAdapter(Context context, List<String> items) {
+        public CheckBoxAdapter(Context context, List<? extends ItemFinancials> items) {
             mContext = context;
             mItems = items;
 
@@ -85,7 +107,7 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
         }
 
         @Override
-        public String getItem(int position) {
+        public ItemFinancials getItem(int position) {
             return mItems.get(position);
         }
 
@@ -96,19 +118,30 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View view, ViewGroup parent) {
             // Get view for row item
-            View view = mInflater.inflate(R.layout.list_item_check, parent, false);
+            if (view == null) {
+                view = mInflater.inflate(R.layout.list_item_check, parent, false);
+            }
 
-            String item = getItem(position);
+            ItemFinancials item = getItem(position);
 
             CheckBox cbItem = view.findViewById(R.id.cbItem);
             TextView txtAmount = view.findViewById(R.id.txtAmount);
 
-            String szAmount = item.split("[|]")[0];
-            String szName = item.split("[|]")[1];
+            cbItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CheckBox cb = (CheckBox) view;
+                    mItems.get(position).setActive(cb.isChecked());
+                    Toast.makeText(ActivityCalculate.this, position + " checked " + cb.isChecked(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            float szAmount = item.getAmount();
+            String szName = item.getTitle();
             cbItem.setText(szName);
-            txtAmount.setText(szAmount);
+            txtAmount.setText(szAmount + "");
 
             return view;
         }
