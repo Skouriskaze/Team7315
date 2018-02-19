@@ -1,22 +1,17 @@
 package a7315.jd.a7315.Activities;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import a7315.jd.a7315.Contracts.ContractCalculate;
@@ -134,7 +129,6 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
                 public void onClick(View view) {
                     CheckBox cb = (CheckBox) view;
                     mItems.get(position).setActive(cb.isChecked());
-                    Toast.makeText(ActivityCalculate.this, position + " checked " + cb.isChecked(), Toast.LENGTH_SHORT).show();
                 }
             });
 
