@@ -9,6 +9,7 @@
     <string name="addCost">Add Cost</string>
     <string name="addAid">Add Aid</string>
     <string name="calculate">Calculate</string>
+    <string name="addDate">Add Deadline</string>
 
     <string name="labelDeadline">Upcoming Deadlines:</string>
     <string name="labelSummary">Summary</string>

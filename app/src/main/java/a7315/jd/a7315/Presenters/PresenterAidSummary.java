@@ -13,12 +13,12 @@ import a7315.jd.a7315.Models.ModelData;
 
 public class PresenterAidSummary implements ContractAidSummary.Presenter {
 
-    ContractAidSummary.View view;
+    private ContractAidSummary.View view;
     private ModelData data;
 
     public PresenterAidSummary(ContractAidSummary.View view, Context context) {
         this.view = view;
-        data = new LocalStorageData(context);
+        data = new LocalStorageData(context, view.getUsername());
         view.setItems(data.getAidItems());
     }
 

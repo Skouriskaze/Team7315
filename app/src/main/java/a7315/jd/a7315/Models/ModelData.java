@@ -1,6 +1,6 @@
 package a7315.jd.a7315.Models;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import a7315.jd.a7315.Items.ItemAid;
@@ -84,7 +84,7 @@ public interface ModelData {
      * @param name The new name
      * @param date The new Date
      */
-    void editDateItem(int index, String name, LocalDate date);
+    void editDateItem(int index, String name, Date date);
 
     /**
      * Removes a date item

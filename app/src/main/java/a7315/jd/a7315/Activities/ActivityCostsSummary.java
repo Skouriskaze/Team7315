@@ -2,6 +2,8 @@ package a7315.jd.a7315.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +42,12 @@ public class ActivityCostsSummary extends AppCompatActivity implements ContractC
     }
 
     @Override
+    public String getUsername() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return settings.getString("username", "");
+    }
+
+    @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
     }
@@ -58,7 +66,6 @@ public class ActivityCostsSummary extends AppCompatActivity implements ContractC
         lvCost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 final int index = i;
                 ItemCost item = (ItemCost) adapterView.getItemAtPosition(index);
 

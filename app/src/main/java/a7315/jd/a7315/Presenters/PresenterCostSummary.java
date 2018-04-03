@@ -18,7 +18,7 @@ public class PresenterCostSummary implements ContractCostsSummary.Presenter {
 
     public PresenterCostSummary(ContractCostsSummary.View view, Context context) {
         this.view = view;
-        data = new LocalStorageData(context);
+        data = new LocalStorageData(context, view.getUsername());
         view.setItems(data.getCostItems());
     }
 

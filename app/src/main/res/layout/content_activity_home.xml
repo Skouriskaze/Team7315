@@ -17,11 +17,27 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <TextView
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?android:listSeparatorTextViewStyle"
-            android:text="@string/labelDeadline"/>
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_gravity="start|center"
+                android:text="@string/labelDeadline"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addDate"
+                android:layout_gravity="end"
+                android:id="@+id/btnAddDate"/>
+
+        </android.support.design.widget.CoordinatorLayout>
+
 
         <ListView
             android:id="@+id/lvDeadlines"

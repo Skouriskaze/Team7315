@@ -20,7 +20,7 @@ public class PresenterCalculate implements ContractCalculate.Presenter {
 
     public PresenterCalculate(ContractCalculate.View view, Context context) {
         this.view = view;
-        data = new LocalStorageData(context);
+        data = new LocalStorageData(context, view.getUsername());
 
         view.setAidItems(data.getAidItems());
         view.setCostItems(data.getCostItems());

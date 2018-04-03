@@ -41,6 +41,8 @@ public interface ContractCalculate {
          * Displays the calculated cost.
          */
         void displayNet(float net);
+
+        String getUsername();
     }
 
     interface Presenter {

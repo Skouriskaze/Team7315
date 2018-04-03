@@ -2,7 +2,9 @@ package a7315.jd.a7315.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +61,10 @@ public class ActivityLogin extends AppCompatActivity implements ContractLogin.Vi
     @Override
     public void onSuccessfulLogin() {
         Intent intent = new Intent(mContext, ActivityHome.class);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("username", mUsername.getText().toString());
+        editor.apply();
         startActivity(intent);
     }
 

@@ -22,6 +22,8 @@ public interface ContractAidSummary {
          * item.
          */
         void updateList();
+
+        String getUsername();
     }
 
     interface Presenter {

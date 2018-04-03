@@ -23,6 +23,8 @@ public interface ContractCostsSummary {
          * item.
          */
         void updateList();
+
+        String getUsername();
     }
 
     interface Presenter {

@@ -1,6 +1,8 @@
 package a7315.jd.a7315.Activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -82,6 +84,12 @@ public class ActivityCalculate extends AppCompatActivity implements ContractCalc
     @Override
     public void displayNet(float net) {
         txtResult.setText(getResources().getString(R.string.costTemplate, net));
+    }
+
+    @Override
+    public String getUsername() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return settings.getString("username", "");
     }
 
     public class CheckBoxAdapter extends BaseAdapter {
