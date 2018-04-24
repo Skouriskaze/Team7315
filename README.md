@@ -26,19 +26,20 @@
 
 <h4> Install Guide </h4>
 
-<h5> *Prerequisites:* </h5>
+<h5> Prerequisites: </h5>
 Android device running Android 4.4 (KitKat) or higher
 Computer with Android Studio if installing via Android Studio
-[Here's a link to download and install Android Studio](https://developer.android.com/studio/index.html)
 
-<h5> *Dependencies:* </h5>
+[You can find the latest version of Android Studio here](https://developer.android.com/studio/index.html)
+
+<h5> Dependencies: </h5>
 None
 
-<h5> *Download Instructions:* </h5>
+<h5> Download Instructions: </h5>
 If installing from the APK, download the APK directly.  
 If installing from Android Studio, download or clone the Git repository and ensure you have the latest version of Android Studio
 
-<h5>*Installation:* </h5>
+<h5> Installation: </h5>
  <h6> From APK:  </h6>
  
   1. Ensure your Android device allows you to install from unknown sources
@@ -56,7 +57,7 @@ If installing from Android Studio, download or clone the Git repository and ensu
   6. Android Studio should automatically install the app onto your phone and immediately launch the app.
 
 
-Built with love by Team 7315
+Built with :heart: by Team 7315
 
 Copyright (C) <2018>  <Jesse Huang, Jonathan Jiang, Nathania Nah, Timothy Lai, Raymond Moser>
 
